@@ -51,7 +51,7 @@ const Post = (props: { postDataReader: () => D_Post | null | undefined }) => {
         </Stack>
         <Divider flexItem orientation="vertical" />
         <ContentBox>
-          <Typography variant="body1">{postData.content}</Typography>
+          <Typography variant="body1">{postData.content.split('\r\n').map(txt =><span>{txt}<br/></span>)}</Typography>
         </ContentBox>
       </Stack>
     </Paper>
