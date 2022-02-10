@@ -1,4 +1,4 @@
-export const base_url = 'http://localhost:5500/'
+import base_url from '../serverUrl.json'
 
 //* Base type of all JSON responses
 export interface BaseJson_Res {
