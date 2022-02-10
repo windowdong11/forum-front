@@ -40,27 +40,9 @@ const CreatePost = () => {
             })
         }
     }
-    const nav = function(){navigate('/')}
     const handlePostForm = async (e : React.FormEvent<HTMLFormElement>) => {
-        // apis.post.CreatePost({...formData, tags: []}, ()=> {navigate('/')})
         e.preventDefault()
-        const { author, password, title, content, tags, images } = formData
-
-        const formd = new FormData()
-        formd.append('author', author)
-        formd.append('password', password)
-        formd.append('title', title)
-        formd.append('content', content)
-        formd.append('tags', tags.toString())
-        if (images)
-            for (let i = 0; i < images.length; i++)
-            formd.append(`images`, images as any)
-        fetch('http://localhost:5500/', {
-            method: 'POST',
-            body: formd,
-        }).then(() => {
-            nav()
-        })
+        apis.post.CreatePost({...formData, tags: formData.tags.split(' ')}, () => {navigate('/')})
     }
 
     return (
