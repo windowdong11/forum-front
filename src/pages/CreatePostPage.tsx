@@ -4,6 +4,7 @@ import UploadBtn, { getFileNames } from "../componentes/Buttons/UploadBtn";
 import apis from '../apis/Apis';
 import { useNavigate } from 'react-router-dom';
 import Paper from '@mui/material/Paper';
+import { isCreatePostFormValid } from "../apis/post/createPost";
 
 type FormChangeEvent = React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
 const imageUploader = {
@@ -42,7 +43,9 @@ const CreatePost = () => {
     }
     const handlePostForm = async (e : React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        apis.post.CreatePost({...formData, tags: formData.tags.split(' ')}, () => {navigate('/')})
+        const tags = formData.tags.split(' ')
+        if(isCreatePostFormValid({...formData, tags}))
+        apis.post.CreatePost({...formData, tags}, () => {navigate('/')})
     }
 
     return (
