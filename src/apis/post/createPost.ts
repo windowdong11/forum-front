@@ -30,7 +30,7 @@ export const isCreatePostFormValid = (params: CreatePostParams) => {
     return true;
 }
 
-const createPost = (params: CreatePostParams, cb: ()=>void) => {
+const createPost = (params: CreatePostParams) => {
   const { author, password, title, content, tags, images } = params
 
   const formData = new FormData()
@@ -45,7 +45,7 @@ const createPost = (params: CreatePostParams, cb: ()=>void) => {
   return baseApi('/', {
     method: 'POST',
     body: formData,
-  }).then(() => {cb()})
+  })
 }
 
 export default createPost

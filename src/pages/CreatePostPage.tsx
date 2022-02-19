@@ -45,7 +45,8 @@ const CreatePost = () => {
         e.preventDefault()
         const tags = formData.tags.split(' ')
         if(isCreatePostFormValid({...formData, tags}))
-        apis.post.CreatePost({...formData, tags}, () => {navigate('/')})
+        apis.post.CreatePost({...formData, tags})
+            .then(() => {navigate('/')})
     }
 
     return (
