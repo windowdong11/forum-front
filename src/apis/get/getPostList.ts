@@ -14,7 +14,7 @@ interface PostList_Res {
 export type GetPostList = Pick<D_Post, Picker>[]
 
 export default async function getPostList() : Promise<GetPostList> {
-  return baseApi<PostList_Res>()
+  return baseApi<PostList_Res>('/post/list')
     .then(res => res.posts.map(post => ({
       ...post,
       ...post_dateTypes.reduce(
