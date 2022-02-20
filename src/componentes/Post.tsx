@@ -1,9 +1,9 @@
 import { Box, Button, ButtonProps, Paper, Divider, Typography, Stack, IconButton, styled } from "@mui/material"
-import D_Post from "../apis/Type_Post"
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
+import { PostData } from "../apis/types/response/Get_Post";
 
 const MarginBox = styled(Box)(({ theme }) => ({
   margin: theme.spacing(1)
@@ -23,7 +23,7 @@ const MenuBtn = styled(Button)<ButtonProps>(({ theme }) => ({
   marginRight: theme.spacing(1),
 }))
 
-const Post = (props: { postDataReader: () => D_Post | null | undefined }) => {
+const Post = (props: { postDataReader: () => PostData | null | undefined }) => {
   const postData = props.postDataReader()
   if (!postData) return <div>404 not found</div>
   return (

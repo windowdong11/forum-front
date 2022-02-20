@@ -2,11 +2,11 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import React from "react";
 import { Link } from "react-router-dom";
-import D_Post from "../apis/Type_Post";
+import Post from "../apis/types/models/Post";
 import TagList from "./TagList";
 
 
-type PostItemProps = Pick<D_Post, '_id'|'title'|'author'|'updated_date'|'tags'>
+type PostItemProps = Pick<Post, '_id'|'title'|'author'|'updated_date'|'tags'>
 
 
 const PostItem = (props: PostItemProps) => {

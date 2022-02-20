@@ -1,18 +1,19 @@
 import Stack from "@mui/material/Stack"
 import { Suspense } from "react"
 import apis from "../apis/Apis"
+import { Get_PostList_Res } from "../apis/types/response/Get_PostList"
 import Loading from "../componentes/Loading"
 import PostItem from "../componentes/PostItem"
-import {GetPostList} from "../apis/get/getPostList"
 
 interface PostListProps {
-  postlistReader : () => GetPostList | undefined
+  postlistReader : () => Get_PostList_Res | undefined
 }
 
 function PostList(props: PostListProps) {
-  const posts = props.postlistReader()
-  if (!posts)
+  const res = props.postlistReader()
+  if (!res)
     return <div>No posts.</div>
+  const posts = res.posts
   return (
     <Stack spacing={2}>
       {posts.map((post, idx) => <PostItem {...post} key={idx}/>)}

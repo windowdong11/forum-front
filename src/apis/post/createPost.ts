@@ -41,8 +41,8 @@ const createPost = (params: CreatePostParams) => {
   formData.append('tags', tags.toString())
   if (images)
     for (let i = 0; i < images.length; i++)
-      formData.append(`images`, images as any)
-  return baseApi('/', {
+      formData.append(`images`, images.item(i) as any)
+  return baseApi('/post/create', {
     method: 'POST',
     body: formData,
   })

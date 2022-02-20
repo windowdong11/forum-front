@@ -1,10 +1,10 @@
 import { Stack } from "@mui/material"
 import Box from "@mui/material/Box"
-import D_Post from "../apis/Type_Post"
+import Post from "../apis/types/models/Post"
 import TagItem from "./TagItem"
 
 interface TagListProps {
-  tags: D_Post['tags']
+  tags: Post['tags']
 }
 
 const TagList = (props: TagListProps) => {
