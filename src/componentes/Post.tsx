@@ -1,4 +1,4 @@
-import { Box, Button, ButtonProps, Paper, Divider, Typography, Stack, IconButton, styled } from "@mui/material"
+import { Box, Button, ButtonProps, Paper, Divider, Typography, Stack, IconButton, styled, ImageList, ImageListItem } from "@mui/material"
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
@@ -9,6 +9,7 @@ import { useState } from "react";
 import PasswordCheckModal from "./PasswordCheckModal";
 import { useNavigate } from "react-router-dom";
 import apis from "../apis/Apis";
+import base_url from '../serverUrl.json'
 
 const MarginBox = styled(Box)(({ theme }) => ({
   margin: theme.spacing(1)
@@ -78,6 +79,13 @@ const Post = (props: { postDataReader: () => PostData | null | undefined }) => {
         </Stack>
         <Divider flexItem orientation="vertical" />
         <ContentBox>
+          {
+            postData.images.map((url, idx) => (
+              <div key={url}>
+                <img src={(new URL(url, base_url)).href} alt={`${idx}`} loading="lazy" style={{'maxHeight': '400px', maxWidth: '100%'}}/>
+              </div>
+            ))
+          }
           <Typography variant="body1">{postData.content.split('\r\n').map(txt =><span>{txt}<br/></span>)}</Typography>
         </ContentBox>
       </Stack>
