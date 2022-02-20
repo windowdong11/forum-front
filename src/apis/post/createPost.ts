@@ -1,4 +1,4 @@
-import { baseApi, BaseJson_Res } from "../BaseAPI";
+import { baseApi } from "../BaseAPI";
 
 export interface CreatePostParams {
   author: string
@@ -11,6 +11,13 @@ export interface CreatePostParams {
 
 export const isCreatePostFormValid = (params: CreatePostParams) => {
   const { author, password, title, content, tags, images } = params
+  if(!author.length) {
+    alert('Author is required')
+    return false
+  }
+  if(password.length !== 4) {
+    alert('Password must be 4 characters')
+  }
   if (title.length < 5) {
     alert('Title must be at least 5 characters long')
     return false;
@@ -19,15 +26,15 @@ export const isCreatePostFormValid = (params: CreatePostParams) => {
     alert('Content must be at least 10 characters long')
     return false;
   }
-  // if (tags.length === 0) {
-    //   alert('Tags must be at least 1 character long')
-    //   return false;
-    // }
-    if (images && images.length > 3) {
-      alert('Images must be less than 3')
-      return false;
-    }
-    return true;
+  if (tags.length === 0) {
+    alert('Tags must be at least 1 character long')
+    return false;
+  }
+  if (images && images.length > 3) {
+    alert('Images must be less than 3')
+    return false;
+  }
+  return true;
 }
 
 const createPost = (params: CreatePostParams) => {
