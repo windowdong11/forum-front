@@ -4,6 +4,11 @@ import FavoriteIcon from '@mui/icons-material/Favorite'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
 import { PostData } from "../apis/types/response/Get_Post";
+import deletePost from "../apis/delete/deletePost";
+import { useState } from "react";
+import PasswordCheckModal from "./PasswordCheckModal";
+import { useNavigate } from "react-router-dom";
+import apis from "../apis/Apis";
 
 const MarginBox = styled(Box)(({ theme }) => ({
   margin: theme.spacing(1)
@@ -25,12 +30,34 @@ const MenuBtn = styled(Button)<ButtonProps>(({ theme }) => ({
 
 const Post = (props: { postDataReader: () => PostData | null | undefined }) => {
   const postData = props.postDataReader()
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const navigator = useNavigate()
   if (!postData) return <div>404 not found</div>
+
+  const handleDelete = (password : string) => {
+    apis.delete.DeletePost({postid: postData._id, password})
+      .then(res => {
+        if(res) {
+          alert('Post removed! :)')
+          navigator('/')
+        }
+        else {
+          alert('Wrong password! :(')
+        }
+      })
+      .catch(res => {
+        console.log(res)
+      })
+  }
+
   return (
     <Paper variant="outlined">
       <MarginBox>
         <MenuBtn variant="outlined" size="small" disabled><EditIcon fontSize="small" />Edit</MenuBtn>
-        <MenuBtn variant="outlined" size="small" disabled><DeleteForeverIcon fontSize="small" />Remove</MenuBtn>
+        <MenuBtn variant="outlined" size="small" onClick={handleOpen}><DeleteForeverIcon fontSize="small" />Remove</MenuBtn>
+        <PasswordCheckModal isOpen={open} handleClose={handleClose} onSubmit={handleDelete}/>
         <Typography variant="caption">Developing Fetures : Edit, Remove, likes, comments</Typography>
       </MarginBox>
       <Divider />

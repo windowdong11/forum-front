@@ -4,6 +4,8 @@ import getPostList from "./get/getPostList"
 import wrapPromise from "./PromiseWrapper"
 import createPost, { CreatePostParams, isCreatePostFormValid } from './post/createPost';
 import Post from "./types/models/Post";
+import updatePost from "./put/updatePost";
+import deletePost, { DeletePostProps } from "./delete/deletePost";
 
 const apis = {
   get: {
@@ -13,7 +15,13 @@ const apis = {
   },
   post: {
     CreatePost: createPost,
-  }
+  },
+  put: {
+    UpdatePost: updatePost,
+  },
+  delete: {
+    DeletePost: deletePost,
+  },
 }
 
 export default apis
