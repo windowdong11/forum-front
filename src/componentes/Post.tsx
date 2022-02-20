@@ -59,7 +59,7 @@ const Post = (props: { postDataReader: () => PostData | null | undefined }) => {
         <MenuBtn variant="outlined" size="small" disabled><EditIcon fontSize="small" />Edit</MenuBtn>
         <MenuBtn variant="outlined" size="small" onClick={handleOpen}><DeleteForeverIcon fontSize="small" />Remove</MenuBtn>
         <PasswordCheckModal isOpen={open} handleClose={handleClose} onSubmit={handleDelete}/>
-        <Typography variant="caption">Developing Fetures : Edit, Remove, likes, comments</Typography>
+        <Typography variant="caption">Developing Fetures : Edit, likes, comments</Typography>
       </MarginBox>
       <Divider />
       <MarginBox>
