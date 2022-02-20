@@ -7,5 +7,8 @@ export interface BaseJson_Res {
 
 export async function baseApi<T>(url?: string, init?: RequestInit) {
   return fetch((new URL(url || '', base_url)).href, init)
-    .then(res => res.json() as Promise<BaseJson_Res & T>)
+    .then(res => {
+      if(res.ok)
+        return res.json() as Promise<BaseJson_Res & T>
+    })
 }
